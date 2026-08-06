@@ -70,6 +70,7 @@ The bot starts a long-polling loop for Telegram and an HTTP server on `:8080` fo
 | `/start` | Authorize in Raindrop |
 | `/status` | Check authorization and expiry date |
 | `/logout` | Revoke access, delete stored tokens |
+| `/help` | Show available commands |
 
 Any message containing an `http://` or `https://` link is saved as a bookmark.
 
@@ -92,4 +93,8 @@ Raindrop does not document the `state` parameter, but it does pass it through th
 
 ## Deployment
 
-For a public deployment, change `RAINDROP_REDIRECT_URI` to a reachable HTTPS address and update the Redirect URI in the Raindrop app settings to match it exactly.
+The bot is a single static binary — cross-compile it with `GOOS=linux GOARCH=amd64` and run it behind a TLS-terminating reverse proxy.
+
+Set `RAINDROP_REDIRECT_URI` to your public HTTPS address and put the same string into the Raindrop app settings — they must match exactly.
+
+Note that a Raindrop app has a single Redirect URI, and Telegram delivers updates to one consumer only. So a deployed bot makes local development impossible until you create a second Raindrop app and a second bot with @BotFather.

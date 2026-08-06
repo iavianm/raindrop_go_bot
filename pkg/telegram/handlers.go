@@ -11,6 +11,13 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
+const helpText = "Here is what I can do:\n\n" +
+	"/start - authorize in Raindrop\n" +
+	"/status - check your authorization\n" +
+	"/logout - revoke access\n" +
+	"/help - show this message\n\n" +
+	"Send me any link and I will save it to Raindrop."
+
 func (b *Bot) handleUpdates(updates tgbotapi.UpdatesChannel) {
 	for update := range updates {
 		if update.Message != nil {
@@ -109,12 +116,10 @@ func (b *Bot) handleCommand(message *tgbotapi.Message) error {
 			return err
 		}
 		b.reply(message.Chat.ID, "You have been logged out.")
+	case "help":
+		b.reply(message.Chat.ID, helpText)
 	default:
-		b.reply(message.Chat.ID, "Unknown command. Here is what I can do:\n\n"+
-			"/start - authorize in Raindrop\n"+
-			"/status - check your authorization\n"+
-			"/logout - revoke access\n\n"+
-			"Send me any link and I will save it to Raindrop.")
+		b.reply(message.Chat.ID, "Unknown command.\n\n"+helpText)
 	}
 
 	return nil

@@ -34,6 +34,7 @@ func (b *Bot) Start() error {
 		tgbotapi.BotCommand{Command: "start", Description: "Authorize in Raindrop"},
 		tgbotapi.BotCommand{Command: "status", Description: "Check your authorization"},
 		tgbotapi.BotCommand{Command: "logout", Description: "Revoke access"},
+		tgbotapi.BotCommand{Command: "help", Description: "Show available commands"},
 	)
 	if _, err := b.bot.Request(cmds); err != nil {
 		return err
