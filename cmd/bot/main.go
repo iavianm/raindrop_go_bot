@@ -20,8 +20,6 @@ func main() {
 		log.Panic(err)
 	}
 
-	bot.Debug = true
-
 	db, err := storage.New("bot.db")
 	if err != nil {
 		log.Fatal(err)
